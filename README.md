@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="assets/fig_logo.png" alt="CARE Logo" width=250/>
+</p>
+
 # CARE
 ## Environment
 
