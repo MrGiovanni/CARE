@@ -1,0 +1,13 @@
+# tested with conda environment python=3.9
+diffusers[torch]    # diffusers==0.32.2, torch==2.5.1
+nibabel
+timm
+datasets
+albumentations
+wandb
+h5py
+scikit-image==0.24.0
+surface-distance==0.1
+numpy==1.26.4
+transformers>=4.25.1
+nnunetv2==2.6.0
