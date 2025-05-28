@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # CARE
-=======
-# Anatomy Aware CT Reconstruction
-
 ## Environment
 
 Create an conda environement via:
@@ -17,4 +13,3 @@ Then install all requirements using:
 ```bash
 pip install -r requirements.txt
 ```
->>>>>>> 6044cf1 (first commit)
