@@ -1,6 +1,6 @@
 <div align="center">
     <img src="assets/fig_logo.png" alt="CARE Logo" width=200/>
-<!-- <h2 align="center">Completeness-Aware Reconstruction Enhancement</h2> -->
+<h2 align="center">Completeness-Aware Reconstruction Enhancement</h2>
 </div>
 <div align="center">
 
