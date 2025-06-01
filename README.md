@@ -1,8 +1,9 @@
 <div align="center">
     <img src="assets/fig_logo.png" alt="CARE Logo" width=200/>
+<h2 align="center">Completeness-Aware Reconstruction Enhancement</h2>
 </div>
-
 <div align="center">
+
 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/CARE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/CARE?style=social)](https://github.com/MrGiovanni/CARE/stargazers)
@@ -13,7 +14,7 @@
 
 </div>
 
-TODO: a short sentence of description
+Completeness-Aware Reconstruction Enhancement (CARE)
 
 ## Paper
 <b>Are Pixel-Wise Metrics Reliable for Sparse-View Computed Tomography Reconstruction?</b> <br/>
@@ -35,10 +36,6 @@ TODO: a short sentence of description
 
 
 ## Installation
-```
-git clone https://github.com/MrGiovanni/CARE.git
-cd CARE
-```
 Create an conda environement via:
 ```bash
 conda create -n care python=3.11 -y
@@ -49,7 +46,11 @@ Then install all requirements using:
 pip install -r requirements.txt
 ```
 
-## 0. Anatmoy-Aware CT Reconstruction Metrics
+## Anatmoy-Aware CT Reconstruction Metrics
+## 0. Train Anatomy Segmentator
+## 1. Train Autoencoder Model
+## 2. Train Diffusion Model
+## 3. Train CARE Model
 
 
 <!-- ## Citation
