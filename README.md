@@ -1,6 +1,6 @@
 <div align="center">
     <img src="assets/fig_logo.png" alt="CARE Logo" width=200/>
-<h2 align="center">Completeness-Aware Reconstruction Enhancement</h2>
+<h2 align="center"><span style="color: blue;">C</span>ompleteness-<span style="color: blue;">A</span>ware <span style="color: blue;">R</span>econstruction <span style="color: blue;">E</span>nhancement</h2>
 </div>
 <div align="center">
 
@@ -14,7 +14,7 @@
 
 </div>
 
-Completeness-Aware Reconstruction Enhancement (CARE)
+CARE (Completeness-Aware Reconstruction Enhancement) is an open-source framework that plugs anatomy-aware intelligence into sparse-view CT reconstruction. It couples a suite of segmentation-derived metrics with a lightweight diffusion-based refinement module, enabling existing analytical, neural-rendering, and low-dose reconstruction methods to recover small organs and vessels that pixel-wise metrics routinely miss. By supervising models with clinically meaningful structural signals, CARE delivers large, consistent gains in diagnostic fidelity while remaining model-agnostic and easy to integrate into any reconstruction pipeline.
 
 ## Paper
 <b>Are Pixel-Wise Metrics Reliable for Sparse-View Computed Tomography Reconstruction?</b> <br/>
