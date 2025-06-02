@@ -49,7 +49,7 @@ We have documented detailed steps to help [prepare for downloading model checkpo
 
 ## Anatmoy-Aware CT Reconstruction Metrics
 > [!NOTE]
-> The following script is for the nine reconstruction methods mentioned in the paper. Feel free to modify to fit your need.
+> The following script is designed for the nine reconstruction methods mentioned in the paper. 
 
 We assume the dataset folder to start with:
 ```bash
@@ -73,12 +73,48 @@ bash step3_nnUNetPredictBase.sh                 # inference anatomy segmentator
 bash step5_calculateMetricsBase.sh              # calculate segmentation metrics
 python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
 ```
-
+Also, all calculated metrics would be under `resultsCSV` folder.
 
 ## 0. Train Anatomy Segmentator
+The anatomy segmentator is built upon nnU-Net, please prepare the dataset first based on [nnU-Net's dataset format](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md).
+Then, train the model (`datasetNum` is your actual nnU-Net dataset number):
+```bash
+export nnUNet_raw="/path/to/Dataset_raw"
+export nnUNet_preprocessed="/path/to/Dataset_preprocessed"
+export nnUNet_results="/path/to/nnUNet/nnUNet_results"
+nnUNetv2_plan_and_preprocess -d datasetNum -pl nnUNetPlannerResEncL --verify_dataset_integrity
+nnUNetv2_train datasetNum 3d_fullres all -p nnUNetResEncUNetLPlans
+```
+
 ## 1. Train Autoencoder Model
+```bash
+cd ./STEP1-AutoEncoderModel/klvae
+bash train.sh
+```
 ## 2. Train Diffusion Model
+```bash
+cd ./STEP2-DiffusionModel
+bash train.sh
+```
 ## 3. Train CARE Model
+```bash
+cd ./STEP3-CAREModel
+bash train.sh
+```
+
+## 4. Inference
+Run the inference of CARE model via:
+```bash
+cd ./STEP3-CAREModel
+bash inference.sh
+```
+Then, calculate the pixel-wise and anatomy-aware metrics:
+```bash
+python -W ignore step2_extractAndpixelMetric.py --CARE # calculate pixel-wise metrics (SSIM and PSNR)
+bash step3_nnUNetPredictCARE.sh                 # inference anatomy segmentator
+bash step5_calculateMetricsCARE.sh              # calculate segmentation metrics
+python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
+```
 
 
 <!-- ## Citation
