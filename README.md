@@ -5,7 +5,7 @@
 <div align="center">
 
 
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/CARE)
+<!-- ![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/CARE) -->
 [![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/CARE?style=social)](https://github.com/MrGiovanni/CARE/stargazers)
 <a href="https://twitter.com/bodymaps317">
         <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
@@ -49,9 +49,14 @@ We have documented detailed steps to help [prepare for downloading model checkpo
 
 ## Anatmoy-Aware CT Reconstruction Metrics
 > [!NOTE]
-> The following script is designed for the nine reconstruction methods mentioned in the paper. 
+> The following script is designed for the nine reconstruction methods mentioned in the paper: three traditional reconstruction methods (FDK, SART, ASD-POCS), five NeRF-based reconstruction methods (InTomo, NeRF, TensoRF, NAF, SAX-NeRF) using the [SAX-NeRF Repo](https://github.com/caiyuanhao1998/SAX-NeRF), and a Gaussian-Spaltting-based method R2-GS based on its own [R2-GS Repo](https://github.com/Ruyi-Zha/r2_gaussian). 
 
-We assume the dataset folder to start with:
+Firstly, Based on the CT reconstruction results from [SAX-NeRF Repo](https://github.com/caiyuanhao1998/SAX-NeRF) and [GitHub Repo](https://github.com/Ruyi-Zha/r2_gaussian), please use the provided script to format the dataset
+```bash
+cd ReconstructionPipeline/  # working directory
+python step1_softlink_BDMAP_O.py    
+```
+The resulting dataset format is:
 ```bash
 └── BDMAP_O/                      # ground truth folder
     └── case_0
@@ -60,9 +65,8 @@ We assume the dataset folder to start with:
     └── case_0
         └── ct.nii.gz   # the reconstructed CT from `methodName` method with `numViews` X-rays
 ```
-First enter the working directory and download the Anatomy Segmentator checkpoint:
+Next, download the Anatomy Segmentator checkpoint:
 ```bash
-cd ReconstructionPipeline/
 huggingface-cli download TianyuLin/CARE --allow-patterns="segmentator/segmentator3D/*" --to-local-dir="./AnatomySegmentator/"
 export CKPT_PATH="./AnatomySegmentator"
 ```
