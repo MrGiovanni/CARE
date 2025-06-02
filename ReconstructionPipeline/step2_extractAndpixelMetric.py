@@ -81,7 +81,7 @@ def process_folder(args):
     return case_id, ssim_3d, psnr_3d
 # --------------------------------------------------------------------------- #
 
-def extract_experimental_results_mp(logs_folder, num_views, CARE=False, n_workers=None):
+def extract_experimental_results_mp(num_views, CARE=False, n_workers=None):
     methods = ["intratomo", 'nerf', 'tensorf', 'naf', 'FDK', "SART", "ASD_POCS", "Lineformer"]
     ignore_ids = ["lty"]
 
@@ -232,7 +232,7 @@ def _process_r2_case(args):
 # --------------------------------------------------------------------------
 # 并行入口函数
 # --------------------------------------------------------------------------
-def extract_experimental_results_r2_gaussian_mp(logs_folder, num_views,
+def extract_experimental_results_r2_gaussian_mp(num_views,
                                                 CARE=False, n_workers=None):
     """
     r2_gaussian 版本的多进程计算函数。
@@ -303,7 +303,6 @@ def extract_experimental_results_r2_gaussian_mp(logs_folder, num_views,
         write_results_to_csv(results, output_csv)
 
 if __name__ == "__main__":
-    logs_folder = 'logs'  # Replace with the actual path to the logs folder
 
     parser = argparse.ArgumentParser(description="Calculate metrics")
     parser.add_argument('--num_views', type=int, default=50)
@@ -312,11 +311,7 @@ if __name__ == "__main__":
 
     num_views = args.num_views  # Replace with the actual number of views to filter
 
-    # NOTE: single core (deprecated)
-    # extract_experimental_results(logs_folder, num_views, args.CARE)
-    # extract_experimental_results_r2_gaussian(logs_folder, num_views, args.CARE)
-
     # NOTE: multi-processing
-    extract_experimental_results_mp(logs_folder, num_views, args.CARE, n_workers=32)
-    extract_experimental_results_r2_gaussian_mp(logs_folder, num_views, args.CARE, n_workers=32)
+    extract_experimental_results_mp(num_views, args.CARE, n_workers=32)
+    extract_experimental_results_r2_gaussian_mp(num_views, args.CARE, n_workers=32)
 

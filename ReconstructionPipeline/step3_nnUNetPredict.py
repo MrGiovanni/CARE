@@ -49,7 +49,7 @@ def parse_args():
     # parser.add_argument('--outdir', type=str, default='./subSegments_output', 
     #                     help="Path to output folder for predictions")
     parser.add_argument('--checkpoint', type=str, 
-                        default='/projects/bodymaps/Tianyu/nnunet/Dataset_results/Dataset101_AbdomenAtlas1-1/nnUNetTrainer__nnUNetResEncUNetPlans_80G__2d', 
+                        default='/projects/bodymaps/Tianyu/AnatomyAwareRecon/ReconstructionPipeline/AnatomySegmentator', 
                         help="Path to model checkpoint folder")
     parser.add_argument('--num_parts', type=int, default=1, 
                         help="Number of parts to split the task into")

@@ -14,7 +14,7 @@
 
 </div>
 
-CARE (Completeness-Aware Reconstruction Enhancement) is an open-source framework that plugs anatomy-aware intelligence into sparse-view CT reconstruction. It couples a suite of segmentation-derived metrics with a lightweight diffusion-based refinement module, enabling existing analytical, neural-rendering, and low-dose reconstruction methods to recover small organs and vessels that pixel-wise metrics routinely miss. By supervising models with clinically meaningful structural signals, CARE delivers large, consistent gains in diagnostic fidelity while remaining model-agnostic and easy to integrate into any reconstruction pipeline.
+The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a critical gap in sparse-view Computed Tomography (CT) reconstruction by shifting the evaluation from traditional pixel-wise metrics to anatomy-aware metrics derived from automated structural segmentation. By incorporating segmentation-informed losses into latent diffusion models, CARE significantly improves the reconstruction fidelity of clinically relevant anatomical structures, ensuring that critical diagnostic features are preserved even under highly limited view conditions.
 
 ## Paper
 <b>Are Pixel-Wise Metrics Reliable for Sparse-View Computed Tomography Reconstruction?</b> <br/>
@@ -45,8 +45,36 @@ Then install all requirements using:
 ```bash
 pip install -r requirements.txt
 ```
+We have documented detailed steps to help [prepare for downloading model checkpoints](documents/DOWNLOAD.md).
 
 ## Anatmoy-Aware CT Reconstruction Metrics
+> [!NOTE]
+> The following script is for the nine reconstruction methods mentioned in the paper. Feel free to modify to fit your need.
+
+We assume the dataset folder to start with:
+```bash
+└── BDMAP_O/                      # ground truth folder
+    └── case_0
+        └── ct.nii.gz   # the ground truth CT of this case
+└── BDMAP_O_methodName_numViews/  # reconstruction results folder
+    └── case_0
+        └── ct.nii.gz   # the reconstructed CT from `methodName` method with `numViews` X-rays
+```
+First enter the working directory and download the Anatomy Segmentator checlpoint:
+```bash
+cd ReconstructionPipeline/
+huggingface-cli download TianyuLin/CARE --allow-patterns="segmentator/segmentator3D/*" --to-local-dir="./AnatomySegmentator/"
+export CKPT_PATH="./AnatomySegmentator"
+```
+Then, calculate the proposed anatomy-aware CT reconstruction metrics:
+```bash
+python -W ignore step2_extractAndpixelMetric.py # calculate pixel-wise metrics (SSIM and PSNR)
+bash step3_nnUNetPredictBase.sh                 # inference anatomy segmentator
+bash step5_calculateMetricsBase.sh              # calculate segmentation metrics
+python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
+```
+
+
 ## 0. Train Anatomy Segmentator
 ## 1. Train Autoencoder Model
 ## 2. Train Diffusion Model

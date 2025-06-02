@@ -3,6 +3,7 @@ STEPX*/
 
 ReconstructionPipeline/BDMAP_*
 ReconstructionPipeline/FlagshipModel*
+ReconstructionPipeline/AnatomySegmentator
 ReconstructionPipeline/logs
 
 STEP1-AutoEncoderModel/vqgan/
