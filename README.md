@@ -1,6 +1,6 @@
 <div align="center">
     <img src="assets/fig_logo.png" alt="CARE Logo" width=200/>
-<h2 align="center"><span style="color: blue;">C</span>ompleteness-<span style="color: blue;">A</span>ware <span style="color: blue;">R</span>econstruction <span style="color: blue;">E</span>nhancement</h2>
+<h2 align="center"><span style="color: blue;"><ins>C</ins></span>ompleteness-<span style="color: blue;"><ins>A</ins></span>ware <span style="color: blue;"><ins>R</ins></span>econstruction <span style="color: blue;"><ins>E</ins></span>nhancement</h2>
 </div>
 <div align="center">
 
