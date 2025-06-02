@@ -60,7 +60,7 @@ We assume the dataset folder to start with:
     └── case_0
         └── ct.nii.gz   # the reconstructed CT from `methodName` method with `numViews` X-rays
 ```
-First enter the working directory and download the Anatomy Segmentator checlpoint:
+First enter the working directory and download the Anatomy Segmentator checkpoint:
 ```bash
 cd ReconstructionPipeline/
 huggingface-cli download TianyuLin/CARE --allow-patterns="segmentator/segmentator3D/*" --to-local-dir="./AnatomySegmentator/"
@@ -82,8 +82,9 @@ Then, train the model (`datasetNum` is your actual nnU-Net dataset number):
 export nnUNet_raw="/path/to/Dataset_raw"
 export nnUNet_preprocessed="/path/to/Dataset_preprocessed"
 export nnUNet_results="/path/to/nnUNet/nnUNet_results"
-nnUNetv2_plan_and_preprocess -d datasetNum -pl nnUNetPlannerResEncL --verify_dataset_integrity
-nnUNetv2_train datasetNum 3d_fullres all -p nnUNetResEncUNetLPlans
+DATASET_NUM=# your actual 3-digit nnU-Net dataset number
+nnUNetv2_plan_and_preprocess -d $DATASET_NUM -pl nnUNetPlannerResEncL --verify_dataset_integrity
+nnUNetv2_train $DATASET_NUM 3d_fullres all -p nnUNetResEncUNetLPlans
 ```
 
 ## 1. Train Autoencoder Model
@@ -102,7 +103,7 @@ cd ./STEP3-CAREModel
 bash train.sh
 ```
 
-## 4. Inference
+## 4. Inference and Evaluation
 Run the inference of CARE model via:
 ```bash
 cd ./STEP3-CAREModel
