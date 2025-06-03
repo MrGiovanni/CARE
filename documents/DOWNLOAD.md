@@ -27,9 +27,8 @@ Use `huggingface-cli download` with `--allow-patterns` and `--ignore-patterns` t
 
 ```bash
 huggingface-cli download TianyuLin/CARE \
-  --allow-patterns="diffusion/*" \
-  --ignore-patterns="*" \
-  --to-local-dir="./local_diffusion"
+  --include="diffusion/*" \
+  --local-dir="./local_diffusion"
 ```
 
 - `TianyuLin/CARE`  

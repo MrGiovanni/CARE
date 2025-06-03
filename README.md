@@ -52,7 +52,7 @@ We have documented detailed steps to help [prepare for downloading model checkpo
 <summary><b>Pretrained Autoencoder Checkpoint</b></summary>
 
 ```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="autoencoder/*" --to-local-dir="./STEP1-AutoEncoderModel/klvae/autoencoder/"
+huggingface-cli download TianyuLin/CARE --include="autoencoder/*" --local-dir="./STEP1-AutoEncoderModel/klvae/"
 ```
 </details>
 
@@ -60,7 +60,7 @@ huggingface-cli download TianyuLin/CARE --allow-patterns="autoencoder/*" --to-lo
 <summary><b>Pretrained Diffusion Model Checkpoint</b></summary>
 
 ```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="diffusion/*" --to-local-dir="./STEP2-DiffusionModel/diffusion/"
+huggingface-cli download TianyuLin/CARE --include="diffusion/*" --local-dir="./STEP2-DiffusionModel/"
 ```
 </details>
 
@@ -68,7 +68,7 @@ huggingface-cli download TianyuLin/CARE --allow-patterns="diffusion/*" --to-loca
 <summary><b>Pretrained CARE Model Checkpoints</b></summary>
 
 ```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="CARE/*" --to-local-dir="./STEP3-CAREModel/CARE/"
+huggingface-cli download TianyuLin/CARE --include="CARE/*" --local-dir="./STEP3-CAREModel/"
 ```
 
 </details>
