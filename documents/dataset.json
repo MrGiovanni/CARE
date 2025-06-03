@@ -1,0 +1,42 @@
+{
+    "name": "KLVAE-LDM-Train-test",
+    "description": "3151 cases for training; 1958 cases for testing",
+    "reference": "",
+    "licence": "CC-BY-SA 4.0",
+    "relase": "1.0 10/28/2024",
+    "tensorImageSize": "3D",
+    "labels": {
+        "background": 0,
+        "aorta": 1,
+        "adrenal_gland_left": 2,
+        "adrenal_gland_right": 3,
+        "common_bile_duct": 4,
+        "celiac_aa": 5,
+        "colon": 6,
+        "duodenum": 7,
+        "gall_bladder": 8,
+        "postcava": 9,
+        "kidney_left": 10,
+        "kidney_right": 11,
+        "liver": 12,
+        "pancreas": 13,
+        "pancreatic_duct": 14,
+        "superior_mesenteric_artery": 15,
+        "intestine": 16,
+        "spleen": 17,
+        "stomach": 18,
+        "veins": 19,
+        "renal_vein_left": 20,
+        "renal_vein_right": 21,
+        "cbd_stent": 22,
+        "pancreatic_pdac": 23,
+        "pancreatic_cyst": 24,
+        "pancreatic_pnet": 25
+    },
+    "numTraining": 3151,
+    "numTest": 1958,
+    "file_ending": ".nii.gz",
+    "channel_names": {
+        "0": "CT"
+    }
+}

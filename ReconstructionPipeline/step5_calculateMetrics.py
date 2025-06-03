@@ -44,12 +44,12 @@ from surface_distance import compute_surface_distances, compute_surface_dice_at_
 """
 
 
-LARGE_LABEL = [12, 10, 11, 13, 17]   # DSC:      liver, kidney, pancreas, spleen
+LARGE_LABEL = [12, 10, 11, 13, 17]   # NSD:      liver, kidney, pancreas, spleen
 SMALL_LABEL = [8, 2, 3, 5, 7]        # NSD:      gallbladder, adrenal gland, celiac trunk (celiac_aa), duodenum.
 VESSEL_LABEL = [1, 9, 15, 20, 21]    # clDice:   aorta, postcava, superior_mesenteric_artery, veins, renal vein
 NON_PDAC_LABEL = [24, 25]            # NSD:      Cyst, PNET
 PDAC_LABEL = [23]                    # NSD:      PDAC
-TUBULAR_LABEL = [6, 16]                # clDice:      colon, intestine
+TUBULAR_LABEL = [6, 16]              # clDice:      colon, intestine
     
 
 
@@ -84,29 +84,13 @@ def process_case(case):
     
     gt = gt_nib.get_fdata().astype(np.uint8)
     pred = pred_nib.get_fdata().astype(np.uint8)
-    # # if ((gt==23)|(gt==24)|(gt==25)).sum()==0:
-    # # print((((gt==23)|(gt==24)|(gt==25))*((pred==23)|(pred==24)|(pred==25))).sum())
-    # gt_tumor = ((gt==23)|(gt==24)|(gt==25))
-    # assert gt_tumor.sum() > 0
-    # pred_tumor = ((pred==23)|(pred==24)|(pred==25))
-    # if (gt_tumor*pred_tumor).sum() > 0:
-    #     flag=1
-    # else:
-    #     flag=0
-    # return flag
-    # print(((pred==23)|(pred==24)|(pred==25)).sum())
 
-
-    
-    large_nsd_list =        [clDice(pred == label, gt == label) * 100 for label in LARGE_LABEL]
-    small_nsd_list =        [clDice(pred == label, gt == label) * 100 for label in SMALL_LABEL]
+    large_nsd_list =        [cal_dice_nsd(pred == label, gt == label, spacing)[1] * 100 for label in LARGE_LABEL]
+    small_nsd_list =        [cal_dice_nsd(pred == label, gt == label, spacing)[1] * 100 for label in SMALL_LABEL]
     vessel_cldice_list =    [clDice(pred == label, gt == label) * 100 for label in VESSEL_LABEL]
-    nonpdac_nsd_list =      [clDice(pred == label, gt == label) * 100 for label in NON_PDAC_LABEL]
-    pdac_nsd_list =         [clDice(pred == label, gt == label) * 100 for label in PDAC_LABEL]
+    nonpdac_nsd_list =      [cal_dice_nsd(pred == label, gt == label, spacing)[1] * 100 for label in NON_PDAC_LABEL]
+    pdac_nsd_list =         [cal_dice_nsd(pred == label, gt == label, spacing)[1] * 100 for label in PDAC_LABEL]
     tubular_cldice_list =   [clDice(pred == label, gt == label) * 100 for label in TUBULAR_LABEL]
-    # tubular_cldice_list =   [cal_dice_nsd(pred == label, gt == label, spacing)[1] * 100 for label in TUBULAR_LABEL]
-    # tubular_cldice_list =   [clDice(pred == label, gt == label) * 100 for label in TUBULAR_LABEL]
-    # print(dice_list + nsd_list + cldice_list)
     
     return [case_id] + large_nsd_list + small_nsd_list + vessel_cldice_list + nonpdac_nsd_list + pdac_nsd_list + tubular_cldice_list
 
@@ -141,7 +125,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calculate metrics")
     parser.add_argument('--pred_path', type=str, default='BDMAP_O_nerf_200', 
                         help="Path to prediction images folder")
-    parser.add_argument('--CARE', action="store_true")  # TODO
+    parser.add_argument('--CARE', action="store_true") 
     args = parser.parse_args()
     print(f"\033[31m{args.pred_path}\033[0m")
     gt_mask_root = "BDMAP_O"

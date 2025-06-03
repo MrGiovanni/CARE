@@ -597,7 +597,7 @@ if __name__ == "__main__":
             shuffle=False,  
             collate_fn=collate_fn_inference,    # prompt rather than token
             batch_size=chunk_size,
-            num_workers=chunk_size if chunk_size <= 32 else 32, # maximum 32 workers
+            num_workers=chunk_size if chunk_size <= 16 else 16, # maximum 16 workers
             drop_last=False
         )
 
@@ -611,15 +611,6 @@ if __name__ == "__main__":
         weights_vector = np.zeros(z_shape)
 
         for batch in tqdm(ct_dataloader):
-            # nii_slice = nii.dataobj[:, :, slice_id:slice_id+3].copy()
-            # nii_slice[nii_slice > 1000] = 1000
-            # nii_slice[nii_slice < -1000] = -1000
-            # nii_slice = (nii_slice + 1000) / 2000
-            # input_image = nii_slice 
-            # input_image = cv2.resize(input_image, (512, 512), cv2.INTER_CUBIC)
-
-            # prompt = "An arterial phase CT slice."  # prompt
-
             # --- Step 1: 图像编码为潜变量 ---
             # image = (torch.from_numpy(input_image.copy())[None].permute(0, 3, 1, 2)).to("cuda").half() * 2 - 1  # [-1, 1]
             # raw_image = batch["pixel_values"].to("cuda").half()   
@@ -632,7 +623,7 @@ if __name__ == "__main__":
 
             # --- Step 3: reverse process to generate a slice ---
             images = pipe(
-                num_inference_steps=200, 
+                num_inference_steps=50, 
                 prompt=prompt,
                 latents=latents,  
                 cond_latents=cond_latents,

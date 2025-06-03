@@ -1,5 +1,5 @@
 export SD_MODEL_NAME="stable-diffusion-v1-5/stable-diffusion-v1-5"
-export FT_VAE_NAME="../STEP1-AutoEncoderModel/klvae/logs/vae_kl6_lr4_std/checkpoint-150000"
+export FT_VAE_NAME="../STEP1-AutoEncoderModel/klvae/logs/klvae/checkpoint-150000"
 
 # NOTE: define which model to inference
   # 0 training not finished
@@ -25,7 +25,6 @@ export TRAIN_DATA_DIR="../ReconstructionPipeline/BDMAP_O_$DATASET_NAME/" # Tempo
 # NOTE: change this into trained models w.r.t to a specific dataset settings
 export TRAINED_UNET_NAME="logs/$EXP_NAME"
 export CKPT_EPOCH="50000"
-# export SEG_MODEL_NAME="/projects/bodymaps/Tianyu/nnunet/Dataset_results/Dataset101_AbdomenAtlas1-1/nnUNetTrainer__nnUNetResEncUNetPlans_80G__2d"
 
 
 

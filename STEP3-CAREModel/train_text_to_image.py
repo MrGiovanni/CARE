@@ -967,7 +967,7 @@ def main():
                                     for path in  dataset["train"] for entry in os.scandir(path) 
                                         if entry.name == "ct.h5"]) # check if h5 file exist and is valid ( `and varifyh5(entry.path)`)
         if accelerator.is_local_main_process:
-            print(f"\033[32mFound {len(dataset['train'])} FELIX CT scans for training...\033[0m")
+            print(f"\033[32mFound {len(dataset['train'])} CT scans for training...\033[0m")
 
     # Preprocessing the datasets.
     # We need to tokenize inputs and targets.
@@ -1320,7 +1320,7 @@ def main():
                     else:
                         raise NotImplementedError("Choose `vae_loss` from 'l1' and 'l2'!")
 
-                    # loss += F.l1_loss(estimated_image/1000., raw_image)
+                    loss += F.l1_loss(estimated_image/1000., raw_image)
                     loss += 0.001 * seg_loss
 
                 else:

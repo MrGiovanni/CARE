@@ -33,7 +33,7 @@ def parse_metric_files(result_csv_filename_pixel, result_csv_filename_seg, split
         if phase is not None:
             pass
         else:
-            bdmap_id_test = pd.read_csv("../STEP3-CAREModel/splits/BDMAP_O_AV_meta_test.csv")["bdmap_id"].apply(lambda x: x[:-2])
+            bdmap_id_test = pd.read_csv("dataset_splits/BDMAP_O_AV_meta_test.csv")["bdmap_id"].apply(lambda x: x[:-2] if x[-1]=="V" else None).dropna()
             df_pixel = df_pixel[df_pixel["case_name"].isin(bdmap_id_test)]
             df_seg = df_seg[df_seg["case_name"].isin(bdmap_id_test)]
     else:   # split `all`
@@ -162,28 +162,15 @@ def printLaTeX_table_line(method, num_view, CARE, split, phase=None):
             color_string = ('green' if diff >= 0 else 'red') + '!' + f"{round_up_to_10((abs(diff), significance_dict[key]))}"
             print(f"  &\cellcolor{{{color_string}}}{metrics[f'{key}_median']:.1f}\\tiny{{~({metrics[f'{key}_q1']:.1f},{metrics[f'{key}_q3']:.1f})}}", end="" if key != metric_nicknames[-1] else "\\\\ \n")
 
-        # print(f"   & \cellcolor{}{metrics['s_med']:.1f}\\tiny{{~({metrics['s_q1']:.1f},{metrics['s_q3']:.1f})}}"
-        #         color_string =('red' if metrics['p_med'] - original_metrics['p_med']>=0 else 'green') + '!' + 
-        #         f" & \cellcolor{}{metrics['p_med']:.1f}\\tiny{{~({metrics['p_q1']:.1f},{metrics['p_q3']:.1f})}}"
-        #         color_string =('red' if metrics['large_nsd_median'] - original_metrics['large_nsd_median']>=0 else 'green') + '!' + 
-        #         f" & \cellcolor{}{metrics['large_nsd_median']:.1f}\\tiny{{~({metrics['large_nsd_q1']:.1f},{metrics['large_nsd_q3']:.1f})}}"
-        #         color_string =('red' if metrics['small_nsd_median'] - original_metrics['small_nsd_median']>=0 else 'green') + '!' + 
-        #         f" & \cellcolor{}{metrics['small_nsd_median']:.1f}\\tiny{{~({metrics['small_nsd_q1']:.1f},{metrics['small_nsd_q3']:.1f})}}"
-        #         color_string =('red' if metrics['vessel_cldice_median'] - original_metrics['vessel_cldice_median']>=0 else 'green') + '!' + 
-        #         f" & \cellcolor{}{metrics['vessel_cldice_median']:.1f}\\tiny{{~({metrics['vessel_cldice_q1']:.1f},{metrics['vessel_cldice_q3']:.1f})}}"
-        #         color_string =('red' if metrics['tubular_median'] - original_metrics['tubular_median']>=0 else 'green') + '!' + 
-        #         f" & \cellcolor{}{metrics['tubular_median']:.1f}\\tiny{{~({metrics['tubular_q1']:.1f},{metrics['tubular_q3']:.1f})}}"
-        #         # f" &\cellcolor{{TODO}} {metrics['tumor_median']:.1f}\\tiny{{~({metrics['tumor_q1']:.1f},{metrics['tumor_q3']:.1f})}}"
-        # )
     else:
         if split == "test":
             print(f"& {prefix}", end="")
-        print(  f"  &{metrics['ssim_median']:.1f}\\tiny{{~({metrics['ssim_q1']:.1f},{metrics['ssim_q3']:.1f})}}"
-                f"  &{metrics['psnr_median']:.1f}\\tiny{{~({metrics['psnr_q1']:.1f},{metrics['psnr_q3']:.1f})}}"
-                f"  &{metrics['large_nsd_median']:.1f}\\tiny{{~({metrics['large_nsd_q1']:.1f},{metrics['large_nsd_q3']:.1f})}}"
-                f"  &{metrics['small_nsd_median']:.1f}\\tiny{{~({metrics['small_nsd_q1']:.1f},{metrics['small_nsd_q3']:.1f})}}"
-                f"  &{metrics['tubular_median']:.1f}\\tiny{{~({metrics['tubular_q1']:.1f},{metrics['tubular_q3']:.1f})}}"
-                f"  &{metrics['vessel_cldice_median']:.1f}\\tiny{{~({metrics['vessel_cldice_q1']:.1f},{metrics['vessel_cldice_q3']:.1f})}} \\\\"
+        print(  f"  &\cellcolor{{blue!{metrics['ssim_median']//2}}}{metrics['ssim_median']:.1f}\\tiny{{~({metrics['ssim_q1']:.1f},{metrics['ssim_q3']:.1f})}}"
+                f"  &\cellcolor{{blue!{metrics['psnr_median']*1.5}}}{metrics['psnr_median']:.1f}\\tiny{{~({metrics['psnr_q1']:.1f},{metrics['psnr_q3']:.1f})}}"
+                f"  &\cellcolor{{blue!{metrics['large_nsd_median']//2}}}{metrics['large_nsd_median']:.1f}\\tiny{{~({metrics['large_nsd_q1']:.1f},{metrics['large_nsd_q3']:.1f})}}"
+                f"  &\cellcolor{{blue!{metrics['small_nsd_median']//2}}}{metrics['small_nsd_median']:.1f}\\tiny{{~({metrics['small_nsd_q1']:.1f},{metrics['small_nsd_q3']:.1f})}}"
+                f"  &\cellcolor{{blue!{metrics['tubular_median']//2}}}{metrics['tubular_median']:.1f}\\tiny{{~({metrics['tubular_q1']:.1f},{metrics['tubular_q3']:.1f})}}"
+                f"  &\cellcolor{{blue!{metrics['vessel_cldice_median']//2}}}{metrics['vessel_cldice_median']:.1f}\\tiny{{~({metrics['vessel_cldice_q1']:.1f},{metrics['vessel_cldice_q3']:.1f})}} \\\\"
                 # f" & {metrics['tumor_median']:.1f}\\tiny{{~({metrics['tumor_q1']:.1f},{metrics['tumor_q3']:.1f})}}"
         )
     
@@ -193,7 +180,7 @@ if __name__ == "__main__":
     num_views_lists = ["50", "200"]
     CARE_list = [True, False]
 
-    csv_root = "resultsCSVddim50"
+    csv_root = "resultsCSVcldice"
 
 
 
@@ -214,6 +201,3 @@ if __name__ == "__main__":
         # printLaTeX_table_line(method=method, num_view="200", CARE=False, split="test")
         # printLaTeX_table_line(method=method, num_view="200", CARE=True, split="test")
     print("*"*50, "*"*7, "*"*50)
-
-
-    

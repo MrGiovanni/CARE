@@ -1,7 +1,9 @@
+export TRAIN_DATA_DIR="/path/to/dataseth5"
 
 accelerate launch train_klvae.py \
-  --train_data_dir="/mnt/data/tlin67/Dataset_raw/FELIXtemp/FELIXh5" \
-  --validation_images ../../../../Dataset_raw/FELIXtemp/FELIXh5/BDMAP_A0000001/ct.h5 ../../../../Dataset_raw/FELIXtemp/FELIXh5/BDMAP_V0000001/ct.h5 \
+  --train_data_dir=$TRAIN_DATA_DIR \
+  --validation_images /path/to/dataseth5/BDMAP_A0000001/ct.h5 /path/to/dataseth5/BDMAP_V0000001/ct.h5 \
+  --resume_from_checkpoint="latest" \
   --resolution=512 \
   --train_batch_size=2 \
   --gradient_accumulation_steps=1 \
@@ -14,5 +16,5 @@ accelerate launch train_klvae.py \
   --validation_steps=1000 \
   --checkpointing_steps=1000 \
   --checkpoints_total_limit=5 \
-  --kl_weight=0 \
-  --output_dir="vae_kl0_lr4_std"
+  --kl_weight=1e-6 \
+  --output_dir="klvae"

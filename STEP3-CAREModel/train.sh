@@ -1,11 +1,11 @@
 export SD_MODEL_NAME="stable-diffusion-v1-5/stable-diffusion-v1-5"
-export FT_VAE_NAME="../STEP1-AutoEncoderModel/klvae/logs/vae_kl6_lr4_std/checkpoint-150000"
-export TRAINED_UNET_NAME="../STEP2-DiffusionModel/logs/l2_cat_df4_noblur/checkpoint-50000"
-export SEG_MODEL_NAME="../../../nnUNet/nnUNet_results/Dataset808_AbdomenAtlasF/nnUNetTrainer__nnUNetResEncUNetLPlans__2d"
+export FT_VAE_NAME="../STEP1-AutoEncoderModel/klvae/logs/klvae/checkpoint-150000"
+export TRAINED_UNET_NAME="../STEP2-DiffusionModel/logs/ldm/checkpoint-50000"
+export SEG_MODEL_NAME="./AnatomySegmentator2D"
 DATASET_NAME=$1
 
-EXP_NAME="AS3_$DATASET_NAME" # best if the same as shown in wandb
-export TRAIN_DATA_DIR="../ReconstructionPipeline/BDMAP_O_$DATASET_NAME/" # Temporary FELIX path!!!!
+EXP_NAME="$DATASET_NAME" # best if the same as shown in wandb
+export TRAIN_DATA_DIR="../ReconstructionPipeline/BDMAP_O_$DATASET_NAME/" 
 
 
 accelerate launch --mixed_precision="no" train_text_to_image.py \
@@ -16,7 +16,7 @@ accelerate launch --mixed_precision="no" train_text_to_image.py \
   --train_data_dir=$TRAIN_DATA_DIR \
   --resume_from_checkpoint="latest" \
   --resolution=512 \
-  --train_batch_size=1 \
+  --train_batch_size=2 \
   --gradient_accumulation_steps=2 \
   --dataloader_num_workers=1 \
   --max_train_steps=100_000 \
