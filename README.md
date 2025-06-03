@@ -10,8 +10,6 @@
 <a href="https://twitter.com/bodymaps317">
         <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
 </a><br/>
-**Subscribe us: https://groups.google.com/u/2/g/bodymaps**  
-
 </div>
 
 The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a critical gap in sparse-view CT reconstruction by shifting the evaluation from traditional pixel-wise metrics to anatomy-aware metrics derived from automated structural segmentation. By incorporating segmentation-informed losses into latent diffusion models, CARE significantly improves the reconstruction fidelity of clinically relevant anatomical structures, ensuring that critical diagnostic features are preserved under highly limited view conditions.
