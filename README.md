@@ -46,7 +46,33 @@ pip install -r requirements.txt
 ```
 We have documented detailed steps to help [prepare for downloading model checkpoints](documents/DOWNLOAD.md).
 
-## Anatmoy-Aware CT Reconstruction Metrics
+## CARE as a CT Reconstruction Enhancement Baseline
+
+<details>
+<summary><b>Pretrained Autoencoder Checkpoint</b></summary>
+
+```bash
+huggingface-cli download TianyuLin/CARE --allow-patterns="autoencoder/*" --to-local-dir="./STEP1-AutoEncoderModel/klvae/autoencoder/"
+```
+</details>
+
+<details>
+<summary><b>Pretrained Diffusion Model Checkpoint</b></summary>
+
+```bash
+huggingface-cli download TianyuLin/CARE --allow-patterns="diffusion/*" --to-local-dir="./STEP2-DiffusionModel/diffusion/"
+```
+</details>
+
+<details>
+<summary><b>Pretrained CARE Model Checkpoints</b></summary>
+
+```bash
+huggingface-cli download TianyuLin/CARE --allow-patterns="CARE/*" --to-local-dir="./STEP3-CAREModel/CARE/"
+```
+
+</details>
+
 > [!NOTE]
 > The following script is designed for the nine reconstruction methods mentioned in the paper: three traditional reconstruction methods (FDK, SART, ASD-POCS), five NeRF-based reconstruction methods (InTomo, NeRF, TensoRF, NAF, SAX-NeRF) using the [SAX-NeRF Repo](https://github.com/caiyuanhao1998/SAX-NeRF), and a Gaussian-Spaltting-based method R2-GS based on its own [R2-GS Repo](https://github.com/Ruyi-Zha/r2_gaussian). Feel free to edit to fit your need.
 
@@ -54,8 +80,9 @@ Firstly, Based on the CT reconstruction results from [SAX-NeRF Repo](https://git
 ```bash
 cd ./ReconstructionPipeline/  # working directory
 python -W ignore step1_softlink_BDMAP_O.py   # place the ground truth CT and segmentation
-python -W ignore step2_extractAndpixelMetric.py # format the reconstruction & pixel-wise metrics
+python -W ignore step2_extractAndpixelMetric.py # calculate pixel-wise metrics (SSIM and PSNR)
 ```
+
 The resulting dataset format is:
 ```bash
 └── BDMAP_O/                      # ground truth folder
@@ -65,7 +92,21 @@ The resulting dataset format is:
     └── BDMAP_O0000001
         └── ct.nii.gz   # the reconstructed CT from `methodName` method with `numViews` X-rays
 ```
-Next, download the Anatomy Segmentator checkpoint:
+
+
+Run the inference of CARE model via:
+```bash
+cd ./STEP3-CAREModel
+bash inference.sh nerf_50 # example
+```
+<!-- Then, calculate the pixel-wise and anatomy-aware metrics:
+```bash
+bash step3_nnUNetPredictCARE.sh                 # inference anatomy segmentator
+bash step5_calculateMetricsCARE.sh              # calculate segmentation metrics
+python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
+``` -->
+
+<!-- Next, download the Anatomy Segmentator checkpoint:
 ```bash
 huggingface-cli download TianyuLin/CARE --allow-patterns="segmentator/segmentator3D/*" --to-local-dir="./AnatomySegmentator/"
 export CKPT_PATH="./AnatomySegmentator"
@@ -129,14 +170,6 @@ bash train.sh
 ```
 
 ## 3. Train CARE Model
-<details>
-<summary>Pretrained CARE Model Checkpoints</summary>
-
-```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="CARE/*" --to-local-dir="./CARE/"
-```
-
-</details>
 
 To train the CARE model, first prepare the dataset by:
 ```bash
@@ -157,21 +190,7 @@ export CKPT_PATH="./AnatomySegmentator2D"
 Then, change the `FT_VAE_NAME` and `TRAINED_UNET_NAME` to select a pretrained autoencoder/diffusion model's checkpoint, and run the training:
 ```bash
 bash train.sh nerf_50  # example
-```
-
-## 4. Inference and Evaluation
-Run the inference of CARE model via:
-```bash
-cd ./STEP3-CAREModel
-bash inference.sh nerf_50 # example
-```
-Then, calculate the pixel-wise and anatomy-aware metrics:
-```bash
-python -W ignore step2_extractAndpixelMetric.py --CARE # calculate pixel-wise metrics (SSIM and PSNR)
-bash step3_nnUNetPredictCARE.sh                 # inference anatomy segmentator
-bash step5_calculateMetricsCARE.sh              # calculate segmentation metrics
-python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
-```
+``` -->
 
 
 <!-- ## Citation

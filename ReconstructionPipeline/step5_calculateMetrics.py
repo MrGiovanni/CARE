@@ -37,9 +37,9 @@ from surface_distance import compute_surface_distances, compute_surface_dice_at_
     20, "renal_vein_left": "左肾静脉",
     21, "renal_vein_right": "右肾静脉",
         22, "cbd_stent": "胆总管支架",
-    23, "pancreatic_pdac": "胰腺导管腺癌",
-    24, "pancreatic_cyst": "胰腺囊肿",
-    25, "pancreatic_pnet": "胰腺神经内分泌肿瘤"
+        23, "pancreatic_pdac": "胰腺导管腺癌",
+        24, "pancreatic_cyst": "胰腺囊肿",
+        25, "pancreatic_pnet": "胰腺神经内分泌肿瘤"
 }
 """
 
