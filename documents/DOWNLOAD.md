@@ -23,7 +23,7 @@ If the repo is public, you can skip this step.
 
 ## 3. (Example) Run the Download Command
 
-Use `huggingface-cli download` with `--allow-patterns` and `--ignore-patterns` to fetch only the subfolder you need. For example, to grab the `diffusion/` folder from the `TianyuLin/CARE` repo:
+Use `huggingface-cli download` with `--inlcude` and `--exclude` to fetch only the subfolder you need. For example, to grab the `diffusion/` folder from the `TianyuLin/CARE` repo:
 
 ```bash
 huggingface-cli download TianyuLin/CARE \
@@ -33,11 +33,11 @@ huggingface-cli download TianyuLin/CARE \
 
 - `TianyuLin/CARE`  
   The full repo ID on Hugging Face (“username/repo_name”).  
-- `--allow-patterns="diffusion/*"`  
+- `--inlcude="diffusion/*"`  
   Only files whose paths start with `diffusion/` will be downloaded.  
-- `--ignore-patterns="*"`  
+- `--exclude="*"`  
   Ignore everything else that does not match `diffusion/*`.  
-- `--to-local-dir="./local_diffusion"`  
+- `--local-dir="./local_diffusion"`  
   Place the downloaded files inside `./local_diffusion/`. If this option is omitted, files are cached under `~/.cache/huggingface/`.
 
 After running the command, you should see progress output and end up with:
