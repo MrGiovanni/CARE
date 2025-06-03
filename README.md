@@ -14,7 +14,7 @@
 
 </div>
 
-The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a critical gap in sparse-view Computed Tomography (CT) reconstruction by shifting the evaluation from traditional pixel-wise metrics to anatomy-aware metrics derived from automated structural segmentation. By incorporating segmentation-informed losses into latent diffusion models, CARE significantly improves the reconstruction fidelity of clinically relevant anatomical structures, ensuring that critical diagnostic features are preserved even under highly limited view conditions.
+The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a critical gap in sparse-view CT reconstruction by shifting the evaluation from traditional pixel-wise metrics to anatomy-aware metrics derived from automated structural segmentation. By incorporating segmentation-informed losses into latent diffusion models, CARE significantly improves the reconstruction fidelity of clinically relevant anatomical structures, ensuring that critical diagnostic features are preserved under highly limited view conditions.
 
 ## Paper
 <b>Are Pixel-Wise Metrics Reliable for Sparse-View Computed Tomography Reconstruction?</b> <br/>
