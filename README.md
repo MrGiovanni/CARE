@@ -26,7 +26,7 @@ The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a c
 [Zongwei Zhou](https://www.zongweiz.com/)<sup>1,*</sup> <br/>
 <sup>1 </sup>Johns Hopkins University,  <sup>2 </sup>Johns Hopkins Medicine  <br/>
 <!-- CVPR, 2024 <br/> -->
-<a href=''><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
+<a href='https://arxiv.org/pdf/2506.02093'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a>
 <a href='https://github.com/MrGiovanni/CARE'><img src='https://img.shields.io/badge/GitHub-Code-blue'></a>
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
