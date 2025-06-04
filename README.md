@@ -2,14 +2,19 @@
     <img src="assets/fig_logo.png" alt="CARE Logo" width=200/>
 <h2 align="center"><span style="color: blue;"><ins>C</ins></span>ompleteness-<span style="color: blue;"><ins>A</ins></span>ware <span style="color: blue;"><ins>R</ins></span>econstruction <span style="color: blue;"><ins>E</ins></span>nhancement</h2>
 </div>
-<div align="center">
 
+<div align="center">
 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/CARE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/CARE?style=social)](https://github.com/MrGiovanni/CARE/stargazers)
 <a href="https://twitter.com/bodymaps317">
         <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
 </a><br/>
+</div>
+
+<div align="center">
+    <i>Diffusion based Anatomy-aware enhancement of sparse-view CT reconstruction.</i>
+    <img src="assets/fig_visual.png" alt="CARE visualization" width="max"/>
 </div>
 
 The Completeness-Aware Reconstruction Enhancement (CARE) framework addresses a critical gap in sparse-view CT reconstruction by shifting the evaluation from traditional pixel-wise metrics to anatomy-aware metrics derived from automated structural segmentation. By incorporating segmentation-informed losses into latent diffusion models, CARE significantly improves the reconstruction fidelity of clinically relevant anatomical structures, ensuring that critical diagnostic features are preserved under highly limited view conditions.
