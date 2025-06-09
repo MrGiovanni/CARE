@@ -7,13 +7,11 @@ import pandas as pd
 import multiprocessing as mp
 import shutil
 
-# mask_folder = "/projects/bodymaps/Data/mask_only/AbdomenAtlas1.1/AbdomenAtlas1.1"
-# mask_folder = "/projects/bodymaps/Tianyu/dataset/AbdomenAtlas1.1"
-ct_folder = "/mnt/bodymaps/image_only/AbdomenAtlasPro/AbdomenAtlasPro"
-gt_folder = "/mnt/ccvl15/tlin67/Dataset_raw/reconFELIX/aarecon_combined_labels"
+ct_folder = "/path/to/CTscan"
+gt_folder = "/path/to/combined_labels"
 
 # tgt_path_mask = 'labelsTr'
-tgt_path_ct = 'BDMAP_O'
+tgt_path_ct = 'CTdata'
 # os.makedirs(tgt_path_mask, exist_ok=True)
 os.makedirs(tgt_path_ct, exist_ok=True)
 
@@ -51,7 +49,7 @@ if __name__ == "__main__":
     num_processes = int(8)
     bdmap_list = []
     # NOTE: should be verified that all methods are the same in CCVL server first!!!
-    sax_cases = sorted(list(set(map(lambda x:"_".join(x.split("/")[-1].split("-")[1].split("_")[0:2]), glob.glob(os.path.join("logs", "Lineformer", "FELIX*"))))))
+    sax_cases = sorted(list(set(map(lambda x:"_".join(x.split("/")[-1].split("-")[1].split("_")[0:2]), glob.glob(os.path.join("logs", "Lineformer", "*"))))))
     data = list(map(lambda x: os.path.join(ct_folder, x)+"/", sax_cases))
     print(sax_cases, len(sax_cases))
     print(data, len(data))
