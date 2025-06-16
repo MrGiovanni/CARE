@@ -47,7 +47,7 @@ Then install all requirements using:
 ```bash
 pip install -r requirements.txt
 ```
-We have documented detailed steps to help [prepare for downloading model checkpoints](documents/DOWNLOAD.md).
+We have documented detailed steps to help [prepare for downloading model checkpoints](documents/huggingface_download.md).
 
 ## CARE as a CT Reconstruction Enhancement Baseline
 
@@ -100,7 +100,8 @@ The resulting dataset format is:
 Run the inference of CARE model via:
 ```bash
 cd ./STEP3-CAREModel
-bash inference.sh nerf_50 # example
+bash inference.sh nerf_50 
+# e.g. using nerf as CT reconstructuin baseline
 ```
 <!-- Then, calculate the pixel-wise and anatomy-aware metrics:
 ```bash
