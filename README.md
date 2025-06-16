@@ -101,7 +101,7 @@ Run the inference of CARE model via:
 ```bash
 cd ./STEP3-CAREModel
 bash inference.sh nerf_50 
-# e.g. using nerf as CT reconstructuin baseline
+# e.g. using nerf as CT reconstruction baseline
 ```
 <!-- Then, calculate the pixel-wise and anatomy-aware metrics:
 ```bash
