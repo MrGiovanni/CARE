@@ -15,8 +15,6 @@
 </div>
 
 
-
-
 ## Installation
 Create an conda environement via:
 ```bash
