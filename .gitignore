@@ -22,3 +22,5 @@ STEP3-CAREModel/wandb
 
 **/wandb/
 **/__pycache__/
+
+*.zip

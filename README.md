@@ -121,7 +121,7 @@ bash step3_nnUNetPredictBase.sh                 # inference anatomy segmentator
 bash step5_calculateMetricsBase.sh              # calculate segmentation metrics
 python -W ignore step6_read_result_csv_for_table1st2nd.py # print metrics in latex table format
 ```
-Also, all calculated metrics would be under `resultsCSV` folder.
+Also, all calculated metrics would be under `resultsCSV` folder. -->
 
 ## 0. Train Anatomy Segmentator
 The anatomy segmentator is built upon nnU-Net, please prepare the dataset first based on [nnU-Net's dataset format](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md). Our anatomy segmentator requires [25 anatomical structures](documents/dataset.json).
@@ -137,13 +137,7 @@ nnUNetv2_train $DATASET_NUM 2d all -p nnUNetResEncUNetLPlans         # 2d versio
 ```
 
 ## 1. Train Autoencoder Model
-<details>
-<summary>Pretrained Autoencoder Checkpoint</summary>
 
-```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="autoencoder/*" --to-local-dir="./autoencoder/"
-```
-</details>
 
 First time [Diffusers](https://github.com/huggingface/diffusers) user should run `accelerate config` for training device configuration. Assume that the original dataset is in BDMAP format (e.g., [AbdomenAtlas 1.0](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas1.0Mini)), please use `./ReconstructionPipeline/niigz2h5.py` to convert the dataset into `*.h5` format.
 
@@ -156,13 +150,6 @@ Then, modify `TRAIN_DATA_DIR` and `validation_images` in `train.sh` and run the 
 bash train.sh
 ```
 ## 2. Train Diffusion Model
-<details>
-<summary>Pretrained Diffusion Model Checkpoint</summary>
-
-```bash
-huggingface-cli download TianyuLin/CARE --allow-patterns="diffusion/*" --to-local-dir="./diffusion/"
-```
-</details>
 
 The dataset remained unchanged comparing to the [Autoencoder section](#1.-Train-Autoencoder-Model). Entering the working directory:
 ```bash
@@ -185,28 +172,27 @@ Next, go to the working directory:
 ```bash
 cd ./STEP3-CAREModel
 ```
-In the `splits` folder, `BDMAP_O_AV_meta_train.csv` and `BDMAP_O_AV_meta_test.csv` control the training and testing set of CARE model. 
+<!-- In the `splits` folder, `BDMAP_O_AV_meta_train.csv` and `BDMAP_O_AV_meta_test.csv` control the training and testing set of CARE model. 
 In addition, download the 2D version anatomy segmentator via:
 ```bash
 huggingface-cli download TianyuLin/CARE --allow-patterns="segmentator/segmentator2D/*" --to-local-dir="./AnatomySegmentator2D/"
 export CKPT_PATH="./AnatomySegmentator2D"
-```
+``` -->
 Then, change the `FT_VAE_NAME` and `TRAINED_UNET_NAME` to select a pretrained autoencoder/diffusion model's checkpoint, and run the training:
 ```bash
 bash train.sh nerf_50  # example
-``` -->
+``` 
 
 
-<!-- ## Citation
-```
-@inproceedings{lin2025are,
+## Citation
+```bibtex
+@article{lin2025pixel,
   title={Are Pixel-Wise Metrics Reliable for Sparse-View Computed Tomography Reconstruction?},
-  author={Lin, Tianyu and Li, Xinran and Zhuang, Chuntung and Chen, Qi and Cai, Yuanhao and Ding, Kai and Yuille, Alan and Zhou, Zongwei},
-  booktitle={},
-  pages={},
+  author={Lin, Tianyu and Li, Xinran and Zhuang, Chuntung and Chen, Qi and Cai, Yuanhao and Ding, Kai and Yuille, Alan L and Zhou, Zongwei},
+  journal={arXiv preprint arXiv:2506.02093},
   year={2025}
 }
-``` -->
+``` 
 
 ## Acknowledgement
 
