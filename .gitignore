@@ -24,3 +24,9 @@ STEP3-CAREModel/wandb
 **/__pycache__/
 
 *.zip
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
